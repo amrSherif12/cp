@@ -33,3 +33,10 @@ long long binpow_raw(long long base, long long exp) {
     }
     return res;
 }
+
+
+
+long long ceil(long  long a, long long b) {
+ return (a + b - 1) / b;
+}
+ 
