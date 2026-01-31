@@ -71,6 +71,8 @@ SuffixArrayResult buildSA(string s) {
         if (k > 0) k--;
     }
 
+    return {sa, lcp};
+}
 
 
 
@@ -127,5 +129,3 @@ void sam_extend(char c) {
     last = cur;
 }
 
-    return {sa, lcp};
-}
