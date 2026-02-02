@@ -1,3 +1,7 @@
+// O(log n) search algorithm for sorted array
+// lower_bound returns an iterator to the first element greater than or equal to the specified value (>=).
+// upper_bound returns an iterator to the first element strictly greater than the specified value (>).
+
 int main() {
     std::vector<int> v = {1, 3, 3, 5, 7, 9};
     // Find first element > 3
@@ -8,6 +12,8 @@ int main() {
     }
 }
 
+
+// linear search
 
 int main() {
     std::vector<int> prefix = {10, 20, 30, 40, 50};
