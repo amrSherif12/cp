@@ -29,3 +29,23 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define lp(i, a, b) for (int i = (a); i < (b); i++)
 #define fastio ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+
+
+// taking input till end of file
+int n;
+while (cin >> n) {
+    // Process test case with n
+}
+
+
+// get input line by line
+
+int t;
+cin >> t;
+cin.ignore(); // Crucial: removes the '\n' after the integer t
+
+while (t--) {
+    string line;
+    getline(cin, line);
+    // Now 'line' correctly contains the full text
+}
