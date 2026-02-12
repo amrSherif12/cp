@@ -50,3 +50,22 @@ void linearSieve(int n) {
         }
     }
 }
+
+
+//
+//
+//  The property of any integer y is that it is congruent to the sum of its digits modulo 9.
+//  y = d(y)  (mod 9)
+//
+
+
+// digit sum
+
+long long getSum(long long n) {
+    long long sum = 0;
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
