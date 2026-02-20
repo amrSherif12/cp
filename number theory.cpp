@@ -25,8 +25,21 @@ ll fact(ll x) {
 
 // combination 
 
-ll comb(ll n, ll r) {
-    return fact(n) / (fact(r) * fact(n - r));
+ll nPr(int n, int r) {
+    if (r < 0 || r > n) return 0;
+    ll res = 1;
+    for (int i = 0; i < r; i++) res *= (n - i);
+    return res;
+}
+
+ll nCr(int n, int r) {
+    if (r < 0 || r > n) return 0;
+    if (r > n / 2) r = n - r;
+    ll res = 1;
+    for (int i = 1; i <= r; i++) {
+        res = res * (n - i + 1) / i;
+    }
+    return res;
 }
 
 // seive of aresth
