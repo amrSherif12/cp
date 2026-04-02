@@ -82,3 +82,33 @@ long long getSum(long long n) {
     }
     return sum;
 }
+
+
+
+// get prime factors
+
+std::vector<long long> getPrimeFactors(long long n) {
+    std::vector<long long> factors;
+    if (n <= 1) return factors;
+
+    // Handle 2 separately so we can skip all even numbers in the loop
+    while (n % 2 == 0) {
+        factors.push_back(2);
+        n /= 2;
+    }
+
+    // Check odd numbers starting from 3 up to sqrt(n)
+    for (long long i = 3; i * i <= n; i += 2) {
+        while (n % i == 0) {
+            factors.push_back(i);
+            n /= i;
+        }
+    }
+
+    // If n is still > 1, the remaining n is a prime factor
+    if (n > 1) {
+        factors.push_back(n);
+    }
+
+    return factors;
+}
