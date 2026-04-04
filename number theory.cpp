@@ -42,25 +42,27 @@ ll nCr(int n, int r) {
     return res;
 }
 
-// seive of aresth
 
-const int MAXN = 10000001; // 10^7
-int spf[MAXN];             // Smallest Prime Factor
-vector<int> primes;        // List of primes found
+// 1. Memory Optimization: bitset uses 1 bit per number. 
+// 10^7 bits = ~1.25 MB (Very light compared to 40MB for int array)
+const int MAXN = 10000001;
+bitset<MAXN> is_prime;
+vector<int> primes;
 
-void linearSieve(int n) {
-    for (int i = 2; i <= n; ++i) {
-        if (spf[i] == 0) {     // i is prime
-            spf[i] = i;
-            primes.push_back(i);
+void sieve() {
+    is_prime.set(); // Set all bits to 1
+    is_prime[0] = is_prime[1] = 0;
+    
+    for (int p = 2; p * p < MAXN; p++) {
+        if (is_prime[p]) {
+            for (int i = p * p; i < MAXN; i += p)
+                is_prime[i] = 0;
         }
-        // Multiply i by every prime found so far
-        for (int p : primes) {
-            // Stop if the prime is larger than i's SPF or exceeds n
-            if (p > spf[i] || (long long)i * p > n) break;
-            
-            spf[i * p] = p;    // Mark the multiple
-        }
+    }
+    
+    // Store primes in a vector for faster access during the Goldbach search
+    for (int p = 2; p < MAXN; p++) {
+        if (is_prime[p]) primes.push_back(p);
     }
 }
 
