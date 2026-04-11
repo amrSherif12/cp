@@ -1,4 +1,5 @@
 // In a complete graph (clique) with V vertices, the number of edges E must be exactly: V * (V - 1) / 2
+// in a clique with V verticies there are V^(V - 2) spanning trees
 
 
 // when making an edge struct for weighted graph u can define an opperator to be able to use the struct in pq
