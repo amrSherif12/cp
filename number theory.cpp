@@ -156,6 +156,18 @@ long long binpow_raw(long long base, long long exp) {
     return res;
 }
 
+// Modular multiplication to prevent overflow when (a * b) > LLONG_MAX
+ll mul_mod(ll a, ll b, ll m) {
+    ll res = 0;
+    a %= m;
+    while (b > 0) {
+        if (b % 2 == 1) res = (res + a) % m;
+        a = (a + a) % m;
+        b /= 2;
+    }
+    return res;
+}
+
 
 
 long long ceil(long  long a, long long b) {
