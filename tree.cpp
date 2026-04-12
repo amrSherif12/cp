@@ -19,6 +19,17 @@ struct BIT {
     
     long long query(int i) { return qry(b1, i) * i - qry(b2, i); }
     long long range_qry(int l, int r) { return query(r) - query(l - 1); }
+
+    vector<long long> get_original_array() {
+        // 1. Get the current prefix sums of the difference array (b1)
+        // In a BIT, query(b1, i) returns D[1] + ... + D[i], 
+        // which IS the value of the array at index i.
+        vector<long long> arr(n + 1);
+        for (int i = 1; i <= n; i++) {
+            arr[i] = qry(b1, i);
+        }
+        return arr;
+    }
 };
 
 
