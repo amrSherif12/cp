@@ -21,15 +21,28 @@ struct BIT {
     long long range_qry(int l, int r) { return query(r) - query(l - 1); }
 
     vector<long long> get_original_array() {
-        // 1. Get the current prefix sums of the difference array (b1)
-        // In a BIT, query(b1, i) returns D[1] + ... + D[i], 
-        // which IS the value of the array at index i.
-        vector<long long> arr(n + 1);
-        for (int i = 1; i <= n; i++) {
-            arr[i] = qry(b1, i);
+    // 1. Copy b1 (the Fenwick tree of the difference array)
+    vector<long long> res = b1; 
+    
+    // 2. Undo the BIT structure in O(N)
+    // We iterate backwards to subtract children from parents
+    for (int i = n; i > 0; --i) {
+        int parent = i + (i & -i);
+        if (parent <= n) {
+            res[parent] -= res[i];
         }
-        return arr;
     }
+
+    // Now 'res' is the literal Difference Array D.
+    // 3. Take prefix sums to get the actual values A[i]
+    // A[i] = D[1] + D[2] + ... + D[i]
+    for (int i = 1; i <= n; ++i) {
+        res[i] += res[i-1];
+    }
+    
+    // res[1...n] now contains your actual array elements.
+    return res;
+}
 };
 
 
