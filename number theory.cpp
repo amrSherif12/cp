@@ -1,10 +1,15 @@
 // when doing an exponential its better use bit shiffting for percision
 cout << pow(2, res); // bad
 cout << (1LL << res); // good
+
 // gcd(a, b) = gcd(a % b, b)
 // gcd(0, x) = x
 // (a + b) % m = ((a % m) + (b % m)) % m
 
+//  The property of any integer y is that it is congruent to the sum of its digits modulo 9.
+//  y = d(y)  (mod 9)
+
+// sum of series of cubes 1^3 + 2^3 + 3^3... = x(x + 1) / 2
 
 // counting number of divisors in O(N logN)
 
@@ -75,11 +80,6 @@ void sieve() {
 }
 
 
-//
-//
-//  The property of any integer y is that it is congruent to the sum of its digits modulo 9.
-//  y = d(y)  (mod 9)
-//
 
 
 // digit sum
