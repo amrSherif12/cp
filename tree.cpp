@@ -69,3 +69,88 @@ ft.range_upd(4, 5, 5);
 // 6. FINAL RANGE QUERY: Sum of index 3 to 5
 // Sum is: 10 + 15 + 5 = 30
 long long sum35 = ft.range_qry(3, 5); // Returns 30
+
+
+
+
+
+/**
+ * Segment Tree Template
+ * Supports: Point Update and Range Query
+ * Time Complexity: Build O(n), Update O(log n), Query O(log n)
+ * Space Complexity: O(n)
+ */
+class SegmentTree {
+private:
+    int n;
+    vector<long long> tree;
+
+    // Change this logic to switch between Sum, Min, Max, etc.
+    long long combine(long long left, long long right) {
+        return left + right; // Currently a Sum Segment Tree
+    }
+
+    void build(const vector<int>& arr, int node, int start, int end) {
+        if (start == end) {
+            tree[node] = arr[start];
+            return;
+        }
+        int mid = (start + end) / 2;
+        build(arr, 2 * node, start, mid);
+        build(arr, 2 * node + 1, mid + 1, end);
+        tree[node] = combine(tree[2 * node], tree[2 * node + 1]);
+    }
+
+    void update(int node, int start, int end, int idx, int val) {
+        if (start == end) {
+            tree[node] = val;
+            return;
+        }
+        int mid = (start + end) / 2;
+        if (idx <= mid)
+            update(2 * node, start, mid, idx, val);
+        else
+            update(2 * node + 1, mid + 1, end, idx, val);
+        tree[node] = combine(tree[2 * node], tree[2 * node + 1]);
+    }
+
+    long long query(int node, int start, int end, int l, int r) {
+        if (r < start || end < l) {
+            return 0; // Return identity element (0 for sum, INF for min, -INF for max)
+        }
+        if (l <= start && end <= r) {
+            return tree[node];
+        }
+        int mid = (start + end) / 2;
+        long long p1 = query(2 * node, start, mid, l, r);
+        long long p2 = query(2 * node + 1, mid + 1, end, l, r);
+        return combine(p1, p2);
+    }
+
+public:
+    SegmentTree(const vector<int>& arr) {
+        n = arr.size();
+        tree.resize(4 * n); // 4n size is safe for any n
+        build(arr, 1, 0, n - 1);
+    }
+
+    void update(int idx, int val) {
+        update(1, 0, n - 1, idx, val);
+    }
+
+    long long query(int l, int r) {
+        return query(1, 0, n - 1, l, r);
+    }
+};
+
+int main() {
+    vector<int> data = {1, 3, 5, 7, 9, 11};
+    SegmentTree st(data);
+
+    cout << "Initial Sum of range (1, 3): " << st.query(1, 3) << endl; // 3+5+7 = 15
+
+    st.update(1, 10); // Change index 1 from 3 to 10
+    cout << "Updated Sum of range (1, 3): " << st.query(1, 3) << endl; // 10+5+7 = 22
+
+    return 0;
+}
