@@ -77,92 +77,54 @@ long long sum35 = ft.range_qry(3, 5); // Returns 30
 #include <iostream>
 #include <vector>
 
-template <typename T>
+using namespace std;
+
+/**
+ * Standard Segment Tree
+ * Operation: Sum (can be modified to Min/Max)
+ */
 class SegmentTree {
-private:
     int n;
-    std::vector<T> tree;
-    std::vector<T> lazy;
-
-    // Helper to push lazy values down to children
-    void push(int node, int start, int end) {
-        if (lazy[node] != 0) {
-            tree[node] += (end - start + 1) * lazy[node]; // Update current node
-            if (start != end) {
-                lazy[2 * node] += lazy[node];             // Mark left child
-                lazy[2 * node + 1] += lazy[node];         // Mark right child
-            }
-            lazy[node] = 0;                               // Reset current lazy
-        }
-    }
-
-    void build(const std::vector<T>& arr, int node, int start, int end) {
-        if (start == end) {
-            tree[node] = arr[start];
-            return;
-        }
-        int mid = (start + end) / 2;
-        build(arr, 2 * node, start, mid);
-        build(arr, 2 * node + 1, mid + 1, end);
-        tree[node] = tree[2 * node] + tree[2 * node + 1];
-    }
-
-    void updateRange(int node, int start, int end, int l, int r, T val) {
-        push(node, start, end);
-        if (start > end || start > r || end < l) return;
-
-        if (start >= l && end <= r) {
-            lazy[node] += val;
-            push(node, start, end);
-            return;
-        }
-
-        int mid = (start + end) / 2;
-        updateRange(2 * node, start, mid, l, r, val);
-        updateRange(2 * node + 1, mid + 1, end, l, r, val);
-        tree[node] = tree[2 * node] + tree[2 * node + 1];
-    }
-
-    T queryRange(int node, int start, int end, int l, int r) {
-        push(node, start, end);
-        if (start > end || start > r || end < l) return 0;
-
-        if (start >= l && end <= r) return tree[node];
-
-        int mid = (start + end) / 2;
-        return queryRange(2 * node, start, mid, l, r) + 
-               queryRange(2 * node + 1, mid + 1, end, l, r);
-    }
+    vector<long long> tree;
 
 public:
-    SegmentTree(const std::vector<T>& arr) {
-        n = arr.size();
+    SegmentTree(int size) : n(size) {
         tree.assign(4 * n, 0);
-        lazy.assign(4 * n, 0);
-        build(arr, 1, 0, n - 1);
     }
 
-    void update(int l, int r, T val) {
-        updateRange(1, 0, n - 1, l, r, val);
+    // Build the tree from an existing array
+    void build(const vector<int>& a, int v, int tl, int tr) {
+        if (tl == tr) {
+            tree[v] = a[tl];
+        } else {
+            int tm = (tl + tr) / 2;
+            build(a, 2 * v, tl, tm);
+            build(a, 2 * v + 1, tm + 1, tr);
+            tree[v] = tree[2 * v] + tree[2 * v + 1];
+        }
     }
 
-    T query(int l, int r) {
-        return queryRange(1, 0, n - 1, l, r);
+    // Point update: change value at index 'pos' to 'new_val'
+    void update(int v, int tl, int tr, int pos, int new_val) {
+        if (tl == tr) {
+            tree[v] = new_val;
+        } else {
+            int tm = (tl + tr) / 2;
+            if (pos <= tm)
+                update(2 * v, tl, tm, pos, new_val);
+            else
+                update(2 * v + 1, tm + 1, tr, pos, new_val);
+            tree[v] = tree[2 * v] + tree[2 * v + 1];
+        }
+    }
+
+    // Range query: find sum in range [l, r]
+    long long query(int v, int tl, int tr, int l, int r) {
+        if (l > r) return 0;
+        if (l == tl && r == tr) return tree[v];
+        
+        int tm = (tl + tr) / 2;
+        return query(2 * v, tl, tm, l, min(r, tm))
+             + query(2 * v + 1, tm + 1, tr, max(l, tm + 1), r);
     }
 };
-
-int main() {
-    std::vector<long long> data = {1, 3, 5, 7, 9, 11};
-    SegmentTree<long long> st(data);
-
-    // Query sum from index 1 to 3: (3 + 5 + 7) = 15
-    std::cout << "Initial Query (1-3): " << st.query(1, 3) << std::endl;
-
-    // Add 10 to indices 1 through 5
-    st.update(1, 5, 10);
-
-    // Query sum from index 1 to 3: (13 + 15 + 17) = 45
-    std::cout << "After Update Query (1-3): " << st.query(1, 3) << std::endl;
-
-    return 0;
-}
