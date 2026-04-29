@@ -79,20 +79,12 @@ long long sum35 = ft.range_qry(3, 5); // Returns 30
 
 using namespace std;
 
-/**
- * Standard Segment Tree
- * Operation: Sum (can be modified to Min/Max)
- */
 class SegmentTree {
+private:
     int n;
     vector<long long> tree;
 
-public:
-    SegmentTree(int size) : n(size) {
-        tree.assign(4 * n, 0);
-    }
-
-    // Build the tree from an existing array
+    // Internal recursive functions (Hidden from the user)
     void build(const vector<int>& a, int v, int tl, int tr) {
         if (tl == tr) {
             tree[v] = a[tl];
@@ -104,27 +96,44 @@ public:
         }
     }
 
-    // Point update: change value at index 'pos' to 'new_val'
     void update(int v, int tl, int tr, int pos, int new_val) {
         if (tl == tr) {
             tree[v] = new_val;
         } else {
             int tm = (tl + tr) / 2;
-            if (pos <= tm)
-                update(2 * v, tl, tm, pos, new_val);
-            else
-                update(2 * v + 1, tm + 1, tr, pos, new_val);
+            if (pos <= tm) update(2 * v, tl, tm, pos, new_val);
+            else update(2 * v + 1, tm + 1, tr, pos, new_val);
             tree[v] = tree[2 * v] + tree[2 * v + 1];
         }
     }
 
-    // Range query: find sum in range [l, r]
     long long query(int v, int tl, int tr, int l, int r) {
         if (l > r) return 0;
         if (l == tl && r == tr) return tree[v];
-        
         int tm = (tl + tr) / 2;
-        return query(2 * v, tl, tm, l, min(r, tm))
-             + query(2 * v + 1, tm + 1, tr, max(l, tm + 1), r);
+        return query(2 * v, tl, tm, l, min(r, tm)) + 
+               query(2 * v + 1, tm + 1, tr, max(l, tm + 1), r);
+    }
+
+public:
+    // 1. Initialize with size only
+    SegmentTree(int size) : n(size) {
+        tree.assign(4 * n, 0);
+    }
+
+    // 2. Initialize and build from a vector
+    SegmentTree(const vector<int>& a) : n(a.size()) {
+        tree.assign(4 * n, 0);
+        build(a, 1, 0, n - 1);
+    }
+
+    // Easy Update: st.update(5, 10);
+    void update(int pos, int new_val) {
+        update(1, 0, n - 1, pos, new_val);
+    }
+
+    // Easy Query: st.query(2, 8);
+    long long query(int l, int r) {
+        return query(1, 0, n - 1, l, r);
     }
 };
