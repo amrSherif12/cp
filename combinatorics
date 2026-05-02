@@ -1,0 +1,3 @@
+// to get all permutations it returns true if it succesfully made a new perm and false if over
+
+next_permutation(nums.begin(), nums.end());
