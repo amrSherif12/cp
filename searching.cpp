@@ -1,3 +1,7 @@
+// when given a budget and asked how many burgurs can u make with that money or whats the best quality computer u can make 
+// use binary search on the budget
+
+
 // O(log n) search algorithm for sorted array
 // lower_bound returns an iterator to the first element greater than or equal to the specified value (>=).
 // upper_bound returns an iterator to the first element strictly greater than the specified value (>).
