@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <charconv>
+#include <bitset>
 #include <complex>
 #include <iomanip>
 #include<iostream>
@@ -10,6 +10,9 @@
 #include <unordered_set>
 #include <vector>
 #include <climits>
+#include <cstdint>
+#include <string>
+#include <unordered_map>
 using namespace std;
 
 #define ll long long
@@ -17,7 +20,8 @@ using namespace std;
 #define vi vector<int>
 #define vb vector<bool>
 #define vd vector<double>
-#define vll vector<ll>
+#define vl vector<ll>
+#define vll vector<pll>
 #define vii vector<pii>
 #define vdd vector<pdd>
 #define si set<int>
@@ -28,7 +32,7 @@ using namespace std;
 #define mii map<int, int>
 #define rep(i, n) for (int i = 0; i < (n); i++)
 #define lp(i, a, b) for (int i = (a); i < (b); i++)
-#define fastio ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+#define fastio ios::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 
 // taking input till end of file
