@@ -1,5 +1,5 @@
 // when given a budget and asked how many burgurs can u make with that money or whats the best quality computer u can make 
-// use binary search on the budget
+// use binary search on the budget or on the quality
 
 
 // O(log n) search algorithm for sorted array
