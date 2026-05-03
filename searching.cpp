@@ -2,6 +2,9 @@
 // use binary search on the budget or on the quality
 
 
+// in bin search calculate the mid like low + (high - low) / 2 to avoid overflow
+
+
 // O(log n) search algorithm for sorted array
 // lower_bound returns an iterator to the first element greater than or equal to the specified value (>=).
 // upper_bound returns an iterator to the first element strictly greater than the specified value (>).
