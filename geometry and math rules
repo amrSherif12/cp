@@ -1,0 +1,47 @@
+/**
+ * MATH & GEOMETRY SNIPPETS FOR COMPETITIVE PROGRAMMING
+ */
+
+// --- GEOMETRY & SHAPES ---
+
+// A regular equilateral triangle with side length s contains exactly s^2 unit triangles.
+// Equiangular Hexagon (120 deg angles): Number of unit triangles = (s1 + s2 + s3)^2 - s1^2 - s3^2 - s5^2.
+// Pick's Theorem: Area = I + (B/2) - 1 (I = interior integer points, B = points on boundary).
+// Distance between (x1, y1) and (x2, y2): sqrt(pow(x2-x1, 2) + pow(y2-y1, 2)).
+// Integer points on segment (x1, y1) to (x2, y2): gcd(abs(x1-x2), abs(y1-y2)) + 1.
+// Sum of interior angles of any n-sided polygon: (n - 2) * 180 degrees.
+// Number of diagonals in an n-gon: n * (n - 3) / 2.
+// Right angle triangles triples like 3-4-5 5-12-13 always have a small number where n (the small number) n^2 + m^2 = (m + 1)^2 if the number is even then its m + 2
+
+// --- NUMBER THEORY ---
+
+// Sum of divisors of N: If N = p1^a * p2^b..., sum = (p1^(a+1)-1)/(p1-1) * (p2^(b+1)-1)/(p2-1)...
+// Number of divisors of N: (a + 1) * (b + 1) * ...
+// GCD(a, b) * LCM(a, b) = a * b.
+// Euler's Totient (phi): Number of integers up to n coprime to n: n * product(1 - 1/p).
+// Fast Exponentiation (Binary Exponentiation): Compute (a^b) % m in O(log b).
+
+// --- SERIES & SUMMATIONS ---
+
+// Sum of first N integers: n * (n + 1) / 2.
+// Sum of first N odd integers: n^2.
+// Sum of first N even integers: n * (n + 1).
+// Sum of first N squares: n * (n + 1) * (2n + 1) / 6.
+// Sum of first N cubes: (n * (n + 1) / 2)^2.
+// Arithmetic Progression (AP): Sum = (n / 2) * (first_term + last_term).
+// Geometric Progression (GP): Sum = a * (r^n - 1) / (r - 1).
+
+// --- COMBINATORICS & ALGEBRA ---
+
+// Handshaking Lemma: Total degree of a graph = 2 * number of edges.
+// Pigeonhole Principle: If n items are put into m containers (n > m), at least one container has >1 item.
+// Stars and Bars: Ways to put n identical items into k distinct bins: C(n + k - 1, k - 1).
+// Derangements: Number of ways to shuffle n items so none are in original place: !n = (n-1)(!(n-1) + !(n-2)).
+// Quadratic Formula: x = (-b ± sqrt(b^2 - 4ac)) / 2a.
+
+// --- LOGARITHMS & POWERS ---
+
+// Number of digits in N (base 10): floor(log10(N)) + 1.
+// Change of base: log_a(b) = log_c(b) / log_c(a).
+// 2^10 approx 10^3, 2^20 approx 10^6, 2^30 approx 10^9 (useful for complexity checks).
+
