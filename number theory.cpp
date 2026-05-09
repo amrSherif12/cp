@@ -154,4 +154,18 @@ ll mul_mod(ll a, ll b, ll m) {
 long long ceil(long  long a, long long b) {
  return (a + b - 1) / b;
 }
- 
+
+
+int main() {
+    int decimalNum = 42;
+
+    // Decimal to Binary (8-bit representation)
+    std::bitset<8> binary(decimalNum);
+    std::cout << "Binary: " << binary << std::endl; // Output: 00101010
+
+    // Binary to Decimal
+    unsigned long backToDecimal = binary.to_ulong();
+    std::cout << "Decimal: " << backToDecimal << std::endl; // Output: 42
+
+    return 0;
+}
