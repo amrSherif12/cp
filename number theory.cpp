@@ -167,5 +167,10 @@ int main() {
     unsigned long backToDecimal = binary.to_ulong();
     std::cout << "Decimal: " << backToDecimal << std::endl; // Output: 42
 
-    return 0;
+   std::string binary = "101010";
+    
+    // std::stoi(string, position_pointer, base)
+    int decimal = std::stoi(binary, nullptr, 2);
+    
+    std::cout << "Decimal: " << decimal << std::endl; // Output: 42
 }
