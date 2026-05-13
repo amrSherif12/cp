@@ -11,6 +11,10 @@ cout << (1LL << res); // good
 
 // sum of series of cubes 1^3 + 2^3 + 3^3... = x(x + 1) / 2
 
+// to get a mathematically correct mod for negatives 
+// long long result = (a % M + M) % M;
+
+
 // counting number of divisors in O(N logN)
 
 const int MAXN = 1000001;
