@@ -12,6 +12,8 @@
 // Sum of interior angles of any n-sided polygon: (n - 2) * 180 degrees.
 // Number of diagonals in an n-gon: n * (n - 3) / 2.
 // Right angle triangles triples like 3-4-5 5-12-13 always have a small number where n (the small number) n^2 + m^2 = (m + 1)^2 if the number is even then its m + 2
+// if you have a line ax + by + c = 0 and point (x1, y1), the shortest distance from that point to the line is: |ax1 + by1 + c| / root(a^2 + b^2)
+// to know if a point (x1, y1) is above or bellow a line ax + by + c = 0 we sub v = ax1 + by1 + c if v is +ve then the point is above if -ve then bellow the line
 
 // --- NUMBER THEORY ---
 
