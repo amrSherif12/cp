@@ -178,3 +178,21 @@ int main() {
     
     std::cout << "Decimal: " << decimal << std::endl; // Output: 42
 }
+
+
+
+// prime factorization
+
+vl factorize(ll n) {
+    vl fact;
+    while (n % 2 == 0) { fact.push_back(2); n /= 2; }
+    while (n % 3 == 0) { fact.push_back(3); n /= 3; }
+
+    for (ll i = 5; i * i <= n; i += 6) {
+        while (n % i == 0) { fact.push_back(i); n /= i; }
+        while (n % (i + 2) == 0) { fact.push_back(i + 2); n /= i + 2; }
+    }
+
+    if (n > 1) fact.push_back(n);
+    return fact;
+}
