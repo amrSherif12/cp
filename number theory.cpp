@@ -165,3 +165,30 @@ vl factorize(ll n) {
     if (n > 1) fact.push_back(n);
     return fact;
 }
+
+
+// get number of factors of all till MAX 
+
+const int MAX = 5000005;
+int spf[MAX];
+int cnt[MAX];
+long long pref[MAX];
+
+void sieve() {
+    for (int i = 1; i < MAX; i++) spf[i] = i;
+    for (int i = 2; i * i < MAX; i++) {
+        if (spf[i] == i) {
+            for (int j = i * i; j < MAX; j += i) {
+                if (spf[j] == j) spf[j] = i;
+            }
+        }
+    }
+
+    for (int i = 2; i < MAX; i++) {
+        cnt[i] = cnt[i / spf[i]] + 1;
+    }
+
+    for (int i = 1; i < MAX; i++) {
+        pref[i] = pref[i - 1] + cnt[i];
+    }
+}
